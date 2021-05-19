@@ -1,5 +1,6 @@
 import discord
 import ids
+import setup
 
 intents = discord.Intents(messages=True, members=True, guilds=True)
 client = discord.Client(intents=intents)
@@ -18,5 +19,8 @@ async def on_message(message):
 
     if message.content == "Hey Chesster":
         await client.get_channel(channelId).send("Hello, <@"+str(message.author.id)+">!")
+    
+    if message.content == "new game":
+        await client.get_channel(channelId).send(resetBoard())
 
 client.run(clientKey)
