@@ -13,4 +13,3 @@ whiteKnight = "\u265E"
 whitePawn = "\u265F"
 blackSquare = "\u25B1"
 whiteSquare = "\u25B0"
-   
