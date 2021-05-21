@@ -1,13 +1,12 @@
 #Asset file for Chesster
-import discord
-    var whiteKing = "\u2664"
-    var whiteQueen = "\u2665"
-    var whiteBishop = "\u2666"
-    var whiteKnight = "\u2667"
-    var whitePawn = "\u2668"
-    var blackKing = "\u2669"
-    var blackQueen = "\u26A"
-    var blackBishop = "\u266B"
-    var blackKnight = "\u266C"
-    var blackPawn = "\u266D"
-   
+whiteKing = u'\u2654'
+whiteQueen = u'\u2655'
+whiteBishop = u'\u2656'
+whiteKnight = u'\u2657'
+whitePawn = u'\u2658'
+blackKing = u'\u2659'
+blackQueen = u'\u265A'
+blackBishop = u'\u265B'
+blackKnight = u'\u2665D'
+blackPawn = u'\u265E'
+checkerBoard = u'\1F67E'
