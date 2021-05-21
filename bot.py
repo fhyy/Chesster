@@ -29,7 +29,7 @@ async def on_message(message):
 
 def getBoardInUglyManner():
     return (
-        "```prolog"
+        "```prolog" + '\n'
         "8"+ " "+ass.blackRook + " "+ass.blackKnight + " "+ass.blackBishop + " "+ass.blackQueen + " "+ass.blackKing + " "+ass.blackBishop + " "+ass.blackKing + " "+ass.blackRook + '\n'
         "7"+ " "+ass.blackPawn + " "+ass.blackPawn + " "+ass.blackPawn + " "+ass.blackPawn + " "+ass.blackPawn + " "+ass.blackPawn + " "+ass.blackPawn + " "+ass.blackPawn + '\n'
         "6"+ " "+ass.whiteSquare + " "+ass.blackSquare + " "+ass.whiteSquare + " "+ass.blackSquare + " "+ass.whiteSquare + " "+ass.blackSquare + " "+ass.whiteSquare + " "+ass.blackSquare + '\n'
