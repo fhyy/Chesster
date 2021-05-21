@@ -29,15 +29,17 @@ async def on_message(message):
 
 def getBoardInUglyManner():
     return (
-        " ABCDEFGH\n"
-        "8"+ ass.blackRook + ass.blackKnight + ass.blackBishop + ass.blackQueen + ass.blackKing + ass.blackBishop + ass.blackKing + ass.blackRook + '\n'
-        "7"+ ass.blackPawn + ass.blackPawn + ass.blackPawn + ass.blackPawn + ass.blackPawn + ass.blackPawn + ass.blackPawn + ass.blackPawn + '\n'
-        "6"+ ass.whiteSquare + ass.blackSquare + ass.whiteSquare + ass.blackSquare + ass.whiteSquare + ass.blackSquare + ass.whiteSquare + ass.blackSquare + '\n'
-        "5"+ ass.blackSquare + ass.whiteSquare + ass.blackSquare + ass.whiteSquare + ass.blackSquare + ass.whiteSquare + ass.blackSquare + ass.whiteSquare + '\n'
-        "4"+ ass.whiteSquare + ass.blackSquare + ass.whiteSquare + ass.blackSquare + ass.whiteSquare + ass.blackSquare + ass.whiteSquare + ass.blackSquare + '\n'
-        "3"+ ass.blackSquare + ass.whiteSquare + ass.blackSquare + ass.whiteSquare + ass.blackSquare + ass.whiteSquare + ass.blackSquare + ass.whiteSquare + '\n'
-        "2"+ ass.whitePawn + ass.whitePawn + ass.whitePawn + ass.whitePawn + ass.whitePawn + ass.whitePawn + ass.whitePawn + ass.whitePawn + '\n'
-        "1"+ ass.whiteRook + ass.whiteKnight + ass.whiteBishop + ass.whiteQueen + ass.whiteKing + ass.whiteBishop + ass.whiteKing + ass.whiteRook + '\n'
+        "```prolog"
+        "8"+ " "+ass.blackRook + " "+ass.blackKnight + " "+ass.blackBishop + " "+ass.blackQueen + " "+ass.blackKing + " "+ass.blackBishop + " "+ass.blackKing + " "+ass.blackRook + '\n'
+        "7"+ " "+ass.blackPawn + " "+ass.blackPawn + " "+ass.blackPawn + " "+ass.blackPawn + " "+ass.blackPawn + " "+ass.blackPawn + " "+ass.blackPawn + " "+ass.blackPawn + '\n'
+        "6"+ " "+ass.whiteSquare + " "+ass.blackSquare + " "+ass.whiteSquare + " "+ass.blackSquare + " "+ass.whiteSquare + " "+ass.blackSquare + " "+ass.whiteSquare + " "+ass.blackSquare + '\n'
+        "5"+ " "+ass.blackSquare + " "+ass.whiteSquare + " "+ass.blackSquare + " "+ass.whiteSquare + " "+ass.blackSquare + " "+ass.whiteSquare + " "+ass.blackSquare + " "+ass.whiteSquare + '\n'
+        "4"+ " "+ass.whiteSquare + " "+ass.blackSquare + " "+ass.whiteSquare + " "+ass.blackSquare + " "+ass.whiteSquare + " "+ass.blackSquare + " "+ass.whiteSquare + " "+ass.blackSquare + '\n'
+        "3"+ " "+ass.blackSquare + " "+ass.whiteSquare + " "+ass.blackSquare + " "+ass.whiteSquare + " "+ass.blackSquare + " "+ass.whiteSquare + " "+ass.blackSquare + " "+ass.whiteSquare + '\n'
+        "2"+ " "+ass.whitePawn + " "+ass.whitePawn + " "+ass.whitePawn + " "+ass.whitePawn + " "+ass.whitePawn + " "+ass.whitePawn + " "+ass.whitePawn + " "+ass.whitePawn + '\n'
+        "1"+ " "+ass.whiteRook + " "+ass.whiteKnight + " "+ass.whiteBishop + " "+ass.whiteQueen + " "+ass.whiteKing + " "+ass.whiteBishop + " "+ass.whiteKing + " "+ass.whiteRook + '\n'
+        ". A B C D E F G H"
+        "```"
     )
         
-# client.run(clientKey)
+client.run(clientKey)
