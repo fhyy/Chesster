@@ -1,6 +1,7 @@
 import discord
 import ids
 import setup
+import chess as chs
 import assets as ass
 
 intents = discord.Intents(messages=True, members=True, guilds=True)
