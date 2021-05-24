@@ -45,112 +45,111 @@ def getPieceOnCoordinates(x, y, boardState):
 def getPieceOnPosition(posIndex, boardState):
     return boardState[posIndex]
     
-def getValidMovesFromPosition(posIndex, boardState, prevBoardstate):
+def getValidMovesFromPosition(posIndex, boardStates):
     x = getX(posIndex)
     y = getY(posIndex)
-    piece = getPieceOnPosition(posIndex, boardState)
+    piece = getPieceOnPosition(posIndex, boardStates)
     if piece == PIECE.WHITE_PAWN or piece == PIECE.BLACK_PAWN:
-        return getValidMovesFromPosition_pawn(getColor(piece), x, y, boardState, prevBoardstate)
+        return getValidMovesFromPosition_pawn(getColor(piece), x, y, boardStates)
     if piece == PIECE.WHITE_KNIGHT or piece == PIECE.BLACK_KNIGHT:
-        return getValidMovesFromPosition_knight(getColor(piece), x, y, boardState)
+        return getValidMovesFromPosition_knight(getColor(piece), x, y, boardStates)
     if piece == PIECE.WHITE_BISHOP or piece == PIECE.BLACK_BISHOP:
-        return getValidMovesFromPosition_bishop(getColor(piece), x, y, boardState)
+        return getValidMovesFromPosition_bishop(getColor(piece), x, y, boardStates)
     if piece == PIECE.WHITE_ROOK or piece == PIECE.BLACK_ROOK:
-        return getValidMovesFromPosition_rook(getColor(piece), x, y, boardState)
+        return getValidMovesFromPosition_rook(getColor(piece), x, y, boardStates)
     if piece == PIECE.WHITE_QUEEN or piece == PIECE.BLACK_QUEEN:
-        return getValidMovesFromPosition_queen(getColor(piece), x, y, boardState)
+        return getValidMovesFromPosition_queen(getColor(piece), x, y, boardStates)
     if piece == PIECE.WHITE_KING or piece == PIECE.BLACK_KING:
-        return getValidMovesFromPosition_king(getColor(piece), x, y, boardState)
+        return getValidMovesFromPosition_king(getColor(piece), x, y, boardStates)
     return []
     
-def getValidMovesFromPosition_pawn(color, x, y, boardState, prevBoardstate):
+def getValidMovesFromPosition_pawn(color, x, y, boardStates):
     posIndex = getIndexFromCoords(x, y)
     valid = []
     if color == COLOR.BLACK:
         if isInside(x, y+1):
-            if getPieceOnPosition(posIndex+DOWN) == PIECE.NONE:
+            if getPieceOnPosition(posIndex+DOWN, boardStates[0]) == PIECE.NONE:
                 valid.append(posIndex+DOWN)
-                if y == 6 and getPieceOnPosition(posIndex+DOWN+DOWN) == PIECE.NONE:
+                if y == 6 and getPieceOnPosition(posIndex+DOWN+DOWN, boardStates[0]) == PIECE.NONE:
                     valid.append(posIndex+DOWN+DOWN)
             if (isInside(x-1, y+1) and
-                getPieceOnPosition(posIndex+DOWN+LEFT) != NONE and
-                getColor(getPieceOnPosition(posIndex+DOWN+LEFT)) == COLOR.WHITE):
+                getPieceOnPosition(posIndex+DOWN+LEFT, boardStates[0]) != NONE and
+                getColor(getPieceOnPosition(posIndex+DOWN+LEFT, boardStates[0])) == COLOR.WHITE):
                 valid.append(posIndex+DOWN+LEFT)
             if (isInside(x+1, y+1) and
-                getPieceOnPosition(posIndex+DOWN+RIGHT) != NONE and
-                getColor(getPieceOnPosition(posIndex+DOWN+RIGHT)) == COLOR.WHITE):
+                getPieceOnPosition(posIndex+DOWN+RIGHT, boardStates[0]) != NONE and
+                getColor(getPieceOnPosition(posIndex+DOWN+RIGHT, boardStates[0])) == COLOR.WHITE):
                 valid.append(posIndex+DOWN+RIGHT)
     else:
         if isInside(x, y-1):
-            if getPieceOnPosition(x, y-1) == PIECE.NONE:
+            if getPieceOnCoordinates(x, y-1, boardStates[0]) == PIECE.NONE:
                 valid.append(posIndex+UP)
-                if y == 1 and getPieceOnPosition(posIndex+UP+UP) == PIECE.NONE:
+                if y == 1 and getPieceOnPosition(posIndex+UP+UP, boardStates[0]) == PIECE.NONE:
                     valid.append(posIndex+UP+UP)
             if (isInside(x-1, y-1) and
-                getPieceOnPosition(posIndex+UP+LEFT) != NONE and
-                getColor(getPieceOnPosition(posIndex+UP+LEFT)) == COLOR.BLACK):
+                getPieceOnPosition(posIndex+UP+LEFT, boardStates[0]) != NONE and
+                getColor(getPieceOnPosition(posIndex+UP+LEFT, boardStates[0])) == COLOR.BLACK):
                 valid.append(posIndex+UP+LEFT)
             if (isInside(x+1, y-1) and
-                getPieceOnPosition(posIndex+UP+RIGHT) != NONE and
-                getColor(getPieceOnPosition(posIndex+UP+RIGHT)) == COLOR.BLACK):
+                getPieceOnPosition(posIndex+UP+RIGHT, boardStates[0]) != NONE and
+                getColor(getPieceOnPosition(posIndex+UP+RIGHT, boardStates[0])) == COLOR.BLACK):
                 valid.append(posIndex+UP+RIGHT)
     return valid    
-def getValidMovesFromPosition_knight(color, x, y, boardState):
+def getValidMovesFromPosition_knight(color, x, y, boardStates):
     valid = []
     for i in [-1,1]:
         for j in [-1,1]:
-            piece = getPieceOnCoordinates(x+(i*2), y+j)
+            piece = getPieceOnCoordinates(x+(i*2), y+j, boardStates[0])
             if piece == PIECE.NONE or getColor(piece) != color:
                 valid.append(getIndexFromCoords(x+(i*2), y+j))
-            piece = getPieceOnCoordinates(x+i, y+(j*2))
+            piece = getPieceOnCoordinates(x+i, y+(j*2), boardStates[0])
             if piece == PIECE.NONE or getColor(piece) != color:
                 valid.append(getIndexFromCoords(x+i, y+(j*2)))
     return valid
-def getValidMovesFromPosition_bishop(color, x, y, boardState):
+def getValidMovesFromPosition_bishop(color, x, y, boardStates):
     valid = []
     for dx in [-1,1]:
         for dy in [-1,1]:
             for d in range(7):
                 if isInside(x+dx*d, y+dy*d):
-                    if getPieceOnCoordinates(x+dx*d, y+dy*d) == PIECE.NONE:
+                    if getPieceOnCoordinates(x+dx*d, y+dy*d, boardStates[0]) == PIECE.NONE:
                         valid.append(getIndexFromCoords(x+dx*d, y+dy*d))
                         continue
-                    elif getColor(getPieceOnCoordinates(x+dx*d, y+dy*d)) != color:
-                        valid.append(getIndexFromCoords(x+dx*d, y+dy*d))
+                    elif getColor(getPieceOnCoordinates(x+dx*d, y+dy*d, boardStates[0])) != color:
+                        valid.append(getIndexFromCoords(x+dx*d, y+dy*d, boardStates[0]))
                     break
                 break
     return valid
-def getValidMovesFromPosition_rook(color, x, y, boardState):
+def getValidMovesFromPosition_rook(color, x, y, boardStates):
     valid = []
     for dx, dy in [(1,0),(-1,0),(0,1),(0,-1)]:
         for d in range(7):
             if isInside(x+dx*d, y+dy*d):
-                if getPieceOnCoordinates(x+dx*d, y+dy*d) == PIECE.NONE:
+                if getPieceOnCoordinates(x+dx*d, y+dy*d, boardStates[0]) == PIECE.NONE:
                     valid.append(getIndexFromCoords(x+dx*d, y+dy*d))
                     continue
-                elif getColor(getPieceOnCoordinates(x+dx*d, y+dy*d)) != color:
+                elif getColor(getPieceOnCoordinates(x+dx*d, y+dy*d, boardStates[0])) != color:
                     valid.append(getIndexFromCoords(x+dx*d, y+dy*d))
                 break
             break
     return valid
-def getValidMovesFromPosition_queen(color, x, y, boardState):
-    return getValidMovesFromPosition_bishop(color, x, y, boardState)
-    + getValidMovesFromPosition_rook(color, posIndex, boardState)
-def getValidMovesFromPosition_king(color, x, y, boardState):
+def getValidMovesFromPosition_queen(color, x, y, boardStates):
+    return getValidMovesFromPosition_bishop(color, x, y, boardStates)
+    + getValidMovesFromPosition_rook(color, posIndex, boardStates)
+def getValidMovesFromPosition_king(color, x, y, boardStates):
     # TODO: castling
     valid = []
     for dx, dy in [(-1,1),(0,1),(1,1),
                    (-1,0),      (1,0),
                    (-1,-1),(0,-1),(1,-1)]:
         if isInside(x+dx, y+dy):
-            piece = getPieceOnCoordinates(x+dx, y+dy)
+            piece = getPieceOnCoordinates(x+dx, y+dy, boardStates[0])
             if piece == PIECE.NONE or getColor(piece) != color:
                 valid.append(getIndexFromCoords(x+dx, y+dy))
     return []
     
-def checkIfValidMove(fromPos, toPos, boardState):
-    # TODO
-    return False
+def checkIfValidMove(fromPos, toPos, boardStates):
+    return toPos in getValidMovesFromPosition(fromPos, boardStates)
     
 def isInside(x, y):
     return x >= 0 and x < 8 and y >= 0 and y < 8
@@ -164,3 +163,6 @@ def getY(posIndex):
 def isInCheck(color, boardState):
     # TODO
     return False
+    
+def addBoardState(newBoardstate, boardStates):
+    boardStates.insert(0, newBoardstate)
