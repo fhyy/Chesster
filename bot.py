@@ -46,4 +46,18 @@ def getNextGameId():
     nextGameCounter = nextGameCounter - random.randint(1,10)
     return base64.b32encode(nextGameCounter.to_bytes(5, byteorder='little'))[:4].decode("utf-8")
 
+### TODO: Syntax
+# > Play white      -- Author queues up for a game playing White. Starts game if Black player awaiting White opponent
+# > Play black      -- Author queues up for a game playing Black. Starts game if White player awaiting Black opponent
+# > Play <color> AI -- Author queues up for a game playing <color> vs the AI.
+# > A3              -- Author makes a move to A3 from the if there's only one valid move to A3, and it's their turn in one game.
+# > A2-A3           -- Author makes a move from A1 to A2, if valid, and it's their turn in one game.
+# > 6XEZ: A3        -- Author makes a move from A1 to A2 in game 6XEZ if there's only one valid move to A3.
+# > 6XEZ: A2-A3     -- Author makes a move from A1 to A2 in game 6XEZ, if valid.
+#
+### Grammar:
+# > Play <COLOR>{ AI}?
+# > {<GAME_ID>: }?{<FROM_POS>-}?<TO_POS>
+###
+
 client.run(clientKey)
