@@ -4,12 +4,16 @@ import setup
 import chess as chs
 import assets as ass
 import visualizer as viz
+import random
+import base64
 
 intents = discord.Intents(messages=True, members=True, guilds=True)
 client = discord.Client(intents=intents)
 
 channelId = ids.channelId
 clientKey = ids.clientKey
+
+nextGameCounter = 99999999999
 
 @client.event
 async def on_ready():
@@ -28,5 +32,13 @@ async def on_message(message):
         
     if message.content == "Print board":
         await client.get_channel(channelId).send(viz.getBoardString(chs.startingBoardState()))
+
+    if message.content == "Game ID":
+        await client.get_channel(channelId).send(getNextGameId())
         
+def getNextGameId():
+    global nextGameCounter
+    nextGameCounter = nextGameCounter - random.randint(1,10)
+    return base64.b32encode(nextGameCounter.to_bytes(5, byteorder='little'))[:4].decode("utf-8")
+
 client.run(clientKey)
