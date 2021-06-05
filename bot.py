@@ -1,6 +1,5 @@
 import discord
 import ids
-import setup
 import chess as chs
 import assets as ass
 import visualizer as viz
