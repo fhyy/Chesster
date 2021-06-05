@@ -17,6 +17,11 @@ DOWN = 8
 LEFT = -1
 RIGHT = 1
 
+class Piece:
+    def __init__(self, colorValue, pieceValue):
+        self.color = colorValue
+        self.piece = pieceValue
+
 # Get index from tuple e.g. A2
 def getIndexFromPosTuple(letterNumTuple):
     return getIndexFromPos(letterNumTuple[0:1], int(letterNumTuple[1:2]))
@@ -156,11 +161,35 @@ def isInCheck(color, boardState):
     
 def addBoardState(newBoardstate, boardStates):
     boardStates.insert(0, newBoardstate)
+
+def startingBoardState():
+    boardState = []
     
-class Piece:
-    color = COLOR.WHITE
-    piece = PIECE.NONE
+    boardState.append(Piece(COLOR.BLACK, PIECE.ROOK))
+    boardState.append(Piece(COLOR.BLACK, PIECE.KNIGHT))
+    boardState.append(Piece(COLOR.BLACK, PIECE.BISHOP))
+    boardState.append(Piece(COLOR.BLACK, PIECE.QUEEN))
+    boardState.append(Piece(COLOR.BLACK, PIECE.KING))
+    boardState.append(Piece(COLOR.BLACK, PIECE.BISHOP))
+    boardState.append(Piece(COLOR.BLACK, PIECE.KNIGHT))
+    boardState.append(Piece(COLOR.BLACK, PIECE.ROOK))
+
+    for i in range(8):
+        boardState.append(Piece(COLOR.BLACK, PIECE.PAWN))
     
-    def __init__(self, colorValue, pieceValue):
-        self.color = colorValue
-        self.piece = pieceValue
+    for i in range(8*4):
+        boardState.append(Piece(COLOR.WHITE, PIECE.NONE))
+
+    for i in range(8):
+        boardState.append(Piece(COLOR.WHITE, PIECE.PAWN))
+
+    boardState.append(Piece(COLOR.WHITE, PIECE.ROOK))
+    boardState.append(Piece(COLOR.WHITE, PIECE.KNIGHT))
+    boardState.append(Piece(COLOR.WHITE, PIECE.BISHOP))
+    boardState.append(Piece(COLOR.WHITE, PIECE.QUEEN))
+    boardState.append(Piece(COLOR.WHITE, PIECE.KING))
+    boardState.append(Piece(COLOR.WHITE, PIECE.BISHOP))
+    boardState.append(Piece(COLOR.WHITE, PIECE.KNIGHT))
+    boardState.append(Piece(COLOR.WHITE, PIECE.ROOK))
+
+    return boardState
