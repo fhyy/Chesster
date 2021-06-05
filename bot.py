@@ -10,10 +10,14 @@ import base64
 intents = discord.Intents(messages=True, members=True, guilds=True)
 client = discord.Client(intents=intents)
 
-channelId = ids.channelId
+channelIds = ids.channelIds
 clientKey = ids.clientKey
 
 nextGameCounter = 99999999999
+
+finishedGames = []
+ongoingGames = []
+gameAwaitingPlayers = []
 
 @client.event
 async def on_ready():
@@ -21,7 +25,8 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.author == client.user or message.channel.id != channelId:
+    channelId = message.channel.id
+    if message.author == client.user or channelId not in channelIds:
         return
 
     if message.content == "Hey Chesster":

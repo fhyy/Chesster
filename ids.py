@@ -1,2 +1,2 @@
 clientKey = '' # replace
-channelId = 0 # replace
+channelIds = [] # add ids
